@@ -862,3 +862,7 @@ input[type=radio]:checked + .upload-effect-label .upload-effect-preview {
 .footer-social-item-vk {
   background-position: -84px 0;
 }
+
+.outline-red {
+  outline: 2px solid red;
+}
