@@ -76,14 +76,24 @@
 
 	effectField.addEventListener('click', useEffects);
 
+	var getErrorFormSave = function(error) {
+			alert(error);
+		};
+
+	var closeForm = function() {
+		document.querySelector('.upload-overlay').classList.add('hidden');
+	};
+
 	var banInput = function(evt) {
 			evt.preventDefault();
 			hashtagInput.classList.add('outline-red');
 		};
 
-		var validityHashtags = function(evt) {
+	var validityHashtags = function(evt) {
+		evt.preventDefault();
 		if(hashtagInput.value === '') {
-			uploadForm.submit();
+			var data = new FormData(uploadForm);
+			window.backend.save(data, closeForm, getErrorFormSave);
 			uploadForm.reset();
 			return;
 		};
@@ -107,10 +117,15 @@
 			banInput(evt);
 			return;
 		};
+		var data = new FormData(uploadForm);
+		window.backend.save(data, closeForm, getErrorFormSave);
 		uploadForm.reset();
 	};
 
-	uploadForm.addEventListener('submit', validityHashtags);
+	uploadForm.addEventListener('submit', function(evt) {
+		evt.preventDefault();
+		validityHashtags(evt);
+	});
 
 	var saturationEffect = function() {
 				var percentPin = limit.minX / 455;
@@ -195,17 +210,5 @@
 
 	uploadPin.addEventListener('mousedown', dragPin);
 	effectField.addEventListener('click', resetEffect);
-
-	/*var movePinToClick = function(evt) {
-		console.log(evt);
-		
-		if(moveToggle) {
-			uploadPin.style.left = evt.offsetX + 'px';
-			fillValue.style.width = evt.offsetX + 'px';
-		};
-
-	};
-
-	fieldDragPin.addEventListener('click', movePinToClick);*/
 
 })();

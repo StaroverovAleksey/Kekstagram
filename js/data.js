@@ -15,22 +15,7 @@
 		return Math.floor(Math.random() * (max - min) + min);
 	};
 
-	var generateFotos = function (photosAmount) {
-		for (var i = 0; i < photosAmount; i++) {
-			photos[i] = {};
-			photos[i].url = 'photos/' + (i + 1) + '.jpg';
-			photos[i].likes = randomNumber (15, 201);
-			photos[i].comments = [];
-			for (var j = 0; j <= randomNumber(0, 2); j++) {
-				photos[i].comments[j] = commentsArray[randomNumber (0, commentsArray.length)];
-			};
-		};
-		return photos;
-	};
-	generateFotos (PHOTOS_AMOUNT);
-
 	window.data = {
-		photos: photos,
 		randomNumber: randomNumber,
 		photosAmount: PHOTOS_AMOUNT
 	};
